@@ -1,6 +1,6 @@
 package com.example.gamequiz
 
-import android.content.Intent
+import  android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class Juego : AppCompatActivity() {
 
@@ -151,6 +152,68 @@ class Juego : AppCompatActivity() {
         //    discardHintCorrect(it)
         //}
 
+        //Creamos variables para la navegacion
+        val navigationBar = findViewById<LinearLayout>(R.id.navigationBar)
+        for (i in 1..10) {
+            val buttonId = resources.getIdentifier("bar$i", "id", packageName)
+            val button = findViewById<Button>(buttonId)
+            button.tag = i // Set the tag to the question number for each button
+        }
+
+
+        // Ponemos listeners para la navegacion
+        for (i in 1..10) {
+            val buttonId = resources.getIdentifier("bar$i", "id", packageName)
+            val button = findViewById<Button>(buttonId)
+            button.setOnClickListener { navigateToQuestion(button.tag as Int) }
+        }
+
+
+    }
+
+
+    private fun updateNavigationBar() {
+        for (i in 0 until questions.size) {
+
+            val isAnsweredHint = answeredQuestionsHint[i] ?: false
+            val isCorrectAnswer = userSelection[i] == questions[i].correctAnswer
+            val isIncorrectAnswer = userSelection[i] != questions[i].correctAnswer && answeredQuestions[i] ?: false
+
+
+            val buttonId = resources.getIdentifier("bar${i + 1}", "id", packageName)
+            val button = findViewById<Button>(buttonId)
+            if (i == questionIndex) {
+
+                // Actualizar barra donde este seleccionado
+                when {
+                    isAnsweredHint -> button.background = ContextCompat.getDrawable(this, R.drawable.selected_button_background_hint)
+                    isCorrectAnswer -> button.background = ContextCompat.getDrawable(this, R.drawable.selected_button_background_correct)
+                    isIncorrectAnswer -> button.background = ContextCompat.getDrawable(this, R.drawable.selected_button_background_incorrect)
+                    else -> button.background = ContextCompat.getDrawable(this, R.drawable.selected_button_background)
+                }
+
+            } else {
+
+                //Aqui cuando no este seleccionado
+
+                when {
+                    isAnsweredHint -> button.background = ContextCompat.getDrawable(this, R.drawable.hint_button_background)
+                    isCorrectAnswer -> button.background = ContextCompat.getDrawable(this, R.drawable.correct_button_background)
+                    isIncorrectAnswer -> button.background = ContextCompat.getDrawable(this, R.drawable.incorrect_button_background)
+                    else -> button.background = ContextCompat.getDrawable(this, R.drawable.button_background)
+                }
+
+            }
+        }
+    }
+
+
+
+
+    private fun navigateToQuestion(questionNumber: Int) {
+        questionIndex = questionNumber - 1 // Adjust question index (0-based)
+        updateQuestion()
+        updateNavigationBar()
     }
 
 
@@ -385,11 +448,13 @@ class Juego : AppCompatActivity() {
 
         questionIndex = (questionIndex + 1) % questions.size
         updateQuestion()
+        updateNavigationBar()
     }
 
     private fun previousQuestion() {
         questionIndex = (questionIndex - 1 + questions.size) % questions.size
         updateQuestion()
+        updateNavigationBar()
     }
 
     private fun endGame() {

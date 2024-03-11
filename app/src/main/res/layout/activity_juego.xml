@@ -84,4 +84,99 @@
 
     </LinearLayout>
 
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <!-- Add 10 bars representing each question -->
+        <Button
+            android:id="@+id/bar1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/bar2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+        <Button
+            android:id="@+id/bar10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="navigateToQuestion" />
+
+
+
+    </LinearLayout>
+
+
+    </LinearLayout>
