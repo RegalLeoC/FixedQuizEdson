@@ -187,45 +187,52 @@ class Juego : AppCompatActivity() {
             val button = Button(this)
             button.text = option
 
-
+            //Aqui poner la de navagacion de regreso para el hint (similar a lo dde arriba)
+            val hintedButton = disabledWrongOptions[questionIndex]?.contains(option) ?: false
 
             val isSelected = userSelection[questionIndex] == option;
 
             //Checa si esta contestado
             // Si contestaste bien pues se pone verde, pero si contestaste mal, se pinta el rojo y se pone el verde mostrandote cual era el correcto
             if (isAnswered) {
+                button.isEnabled = false
                 val correctAnswer = questions[questionIndex].correctAnswer
                 if (option == correctAnswer) {
                     button.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
+
                 } else if (isSelected) {
                     button.setBackgroundColor(resources.getColor(android.R.color.holo_red_light))
+
                 }
 
-
-
-
-
-                disableButtons()
+                if(hintedButton){
+                    button.setBackgroundColor(resources.getColor(android.R.color.holo_blue_light))
+                }
 
             }
 
+            //Permite usar hint y navegar
+            if(!isAnswered){
+                if(hintedButton){
+                    button.setBackgroundColor(resources.getColor(android.R.color.holo_blue_light))
+                    button.isEnabled = false
+                }
+            }
 
-            //Aqui poner la de navagacion de regreso para el hint (similar a lo dde arriba)
-            val hintedButton = disabledWrongOptions[questionIndex]?.contains(option) ?: false
 
+            // Navegacion si se contesto usando hints
             if(isAnsweredHint){
+                button.isEnabled = false
                 val correctAnswer = questions[questionIndex].correctAnswer
 
                 if(option == correctAnswer) {
                     button.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
                 }
 
-                //!!!!!!!!! No sirve porque deshabilita todos los hints (pa eso sirve la funcion exclusiva que revise los disabled)
                 if(hintedButton){
                     button.setBackgroundColor(resources.getColor(android.R.color.holo_blue_light))
                 }
 
-                //!!!!!!No deshabilita todos. Deja el ultimo habilitado
                 disableButtons()
 
             }
@@ -241,7 +248,7 @@ class Juego : AppCompatActivity() {
                         correctAnswers++ // Increment totalCorrectAnswers when the correct answer is selected
 
                         //Add one more hint if in hint streak
-                        if (hintStreak == 2){
+                        if (hintStreak == 1){
                             hintsAvailable++
                             hintTextView.text = hintsAvailable.toString()
                             hintStreak = 0
@@ -250,9 +257,23 @@ class Juego : AppCompatActivity() {
                         }
 
 
-
                     } else {
                         button.setBackgroundColor(resources.getColor(android.R.color.holo_red_light))
+                        hintStreak = 0
+                        //!!!!!Añadir que te señale igualmente la respuesta correcta de verde (lo hace en navegacion pero no instantaneamente)
+
+                        for (i in 0 until buttonContainer.childCount) {
+                            val child = buttonContainer.getChildAt(i)
+
+                            if (child is Button && child.text.toString() == correctAnswer) {
+
+                                child.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
+
+                            }
+
+                        }
+
+
                     }
 
                     answeredQuestions[questionIndex] = true
@@ -273,13 +294,10 @@ class Juego : AppCompatActivity() {
 
     // Despues dded contestar se deshabilitan todos los botones para preevenir que el usuario conteste otra vez
     private fun disableButtons() {
-
         for (i in 0 until buttonContainer.childCount) {
             val child = buttonContainer.getChildAt(i)
             if (child is Button) {
-
                 child.isEnabled = false
-
             }
         }
     }
