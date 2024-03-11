@@ -1,6 +1,7 @@
 package com.example.gamequiz
 
 import  android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -68,19 +69,45 @@ class Juego : AppCompatActivity() {
         //Saving the topics
         topics = Topics.values()
 
-        //Initializing
-        selectRandomQuestions()
 
-        //Show questions
+        // Horizontal layout?
+
+        if (savedInstanceState != null) {
+            // Restore the activity's state
+            questionOptions = savedInstanceState.getSerializable("questionOptions") as MutableMap<Int, List<String>>
+            enabledWrongOptions = savedInstanceState.getSerializable("enabledWrongOptions") as MutableMap<Int, MutableList<String>>
+            disabledWrongOptions = savedInstanceState.getSerializable("disabledWrongOptions") as MutableMap<Int, List<String>>
+            answeredQuestions = savedInstanceState.getSerializable("answeredQuestions") as MutableMap<Int, Boolean>
+            answeredQuestionsHint = savedInstanceState.getSerializable("answeredQuestionsHint") as MutableMap<Int, Boolean>
+            userSelection = savedInstanceState.getSerializable("userSelection") as MutableMap<Int, String?>
+            hintSelection = savedInstanceState.getSerializable("hintSelection") as MutableMap<Int, String?>
+            questionIndex = savedInstanceState.getInt("questionIndex")
+            hintsAvailable = savedInstanceState.getInt("hintsAvailable")
+            hintStreak = savedInstanceState.getInt("hintStreak")
+            hintsUsed = savedInstanceState.getInt("hintsUsed")
+            finalScore = savedInstanceState.getInt("finalScore")
+            correctAnswers = savedInstanceState.getInt("correctAnswers")
+            difficultyMultiplier = savedInstanceState.getDouble("difficultyMultiplier")
+        } else {
+            //Initializing
+            selectRandomQuestions()
+
+            //Show questions
+            updateQuestion()
+
+            //Initialize maps based on amount of questions (that were created in selectrandomquestions)
+            for(i in 0 until questions.size){
+                answeredQuestions[i] = false; // None of the questions are answered yet
+                answeredQuestionsHint[i] = false; // None of the questions are answered yet
+                userSelection[i] = null; // Putting a null for it not to be empty
+                hintSelection[i] = null; // Putting a null for it not to be empty
+            }
+
+
+        }
+
         updateQuestion()
 
-        //Initialize maps based on amount of questions (that were created in selectrandomquestions)
-        for(i in 0 until questions.size){
-            answeredQuestions[i] = false; // None of the questions are answered yet
-            answeredQuestionsHint[i] = false; // None of the questions are answered yet
-            userSelection[i] = null; // Putting a null for it not to be empty
-            hintSelection[i] = null; // Putting a null for it not to be empty
-        }
 
         //Exploration
         findViewById<Button>(R.id.nextButton).setOnClickListener {
@@ -98,6 +125,57 @@ class Juego : AppCompatActivity() {
 
 
     }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Load the horizontal layout
+            setContentView(R.layout.activity_juego_horizontal)
+            // Update references to the views in the new layout
+            buttonContainer = findViewById(R.id.buttonContainer)
+            questionTextView = findViewById(R.id.questionTextView)
+            topicImageView = findViewById(R.id.topicImageView)
+            questionNumberTextView = findViewById(R.id.questionNumberTextView)
+            hintTextView = findViewById(R.id.hintTextView)
+            hintButton = findViewById(R.id.hintButton)
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // Load the original layout
+            setContentView(R.layout.activity_juego)
+            // Update references to the views in the original layout
+            buttonContainer = findViewById(R.id.buttonContainer)
+            questionTextView = findViewById(R.id.questionTextView)
+            topicImageView = findViewById(R.id.topicImageView)
+            questionNumberTextView = findViewById(R.id.questionNumberTextView)
+            hintTextView = findViewById(R.id.hintTextView)
+            hintButton = findViewById(R.id.hintButton)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Save the activity's state
+        outState.putSerializable("questionOptions", HashMap(questionOptions))
+        outState.putSerializable("enabledWrongOptions", HashMap(enabledWrongOptions))
+        outState.putSerializable("disabledWrongOptions", HashMap(disabledWrongOptions))
+        outState.putSerializable("answeredQuestions", HashMap(answeredQuestions))
+        outState.putSerializable("answeredQuestionsHint", HashMap(answeredQuestionsHint))
+        outState.putSerializable("userSelection", HashMap(userSelection))
+        outState.putSerializable("hintSelection", HashMap(hintSelection))
+        outState.putInt("questionIndex", questionIndex)
+        outState.putInt("hintsAvailable", hintsAvailable)
+        outState.putInt("hintStreak", hintStreak)
+        outState.putInt("hintsUsed", hintsUsed)
+        outState.putInt("finalScore", finalScore)
+        outState.putInt("correctAnswers", correctAnswers)
+        outState.putDouble("difficultyMultiplier", difficultyMultiplier)
+    }
+
+
+
+
 
     private fun selectRandomQuestions(){
         val allQuestions = topics.flatMap {it.questions}.toMutableList()
