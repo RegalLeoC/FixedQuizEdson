@@ -17,7 +17,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_main)
 
         val spinner = findViewById<Spinner>(R.id.difficultySpinner)
-        val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, difficulty)
+        val arrayAdapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, difficulty)
         spinner.adapter = arrayAdapter
         spinner.onItemSelectedListener = this
 
@@ -26,6 +27,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val intent = Intent(this, Juego::class.java)
             intent.putExtra("difficulty", difficulty[spinner.selectedItemPosition])
             startActivity(intent)
+            finish()
+        }
+
+        val opcionesbutton = findViewById<Button>(R.id.opcionesButton)
+        opcionesbutton.setOnClickListener{
+            val intent = Intent(this, OpcionesJuego::class.java)
+            startActivity(intent)
+            finish()
         }
 
 
@@ -45,5 +54,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         }
     }
+
+
+
 
 }
