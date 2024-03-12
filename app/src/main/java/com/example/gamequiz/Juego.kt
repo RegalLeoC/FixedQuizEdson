@@ -71,7 +71,6 @@ class Juego : AppCompatActivity() {
 
 
         // Horizontal layout?
-
         if (savedInstanceState != null) {
             // Restore the activity's state
             questionOptions = savedInstanceState.getSerializable("questionOptions") as MutableMap<Int, List<String>>
@@ -88,6 +87,10 @@ class Juego : AppCompatActivity() {
             finalScore = savedInstanceState.getInt("finalScore")
             correctAnswers = savedInstanceState.getInt("correctAnswers")
             difficultyMultiplier = savedInstanceState.getDouble("difficultyMultiplier")
+
+            updateQuestion()
+
+
         } else {
             //Initializing
             selectRandomQuestions()
@@ -126,33 +129,6 @@ class Juego : AppCompatActivity() {
 
     }
 
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // Load the horizontal layout
-            setContentView(R.layout.activity_juego_horizontal)
-            // Update references to the views in the new layout
-            buttonContainer = findViewById(R.id.buttonContainer)
-            questionTextView = findViewById(R.id.questionTextView)
-            topicImageView = findViewById(R.id.topicImageView)
-            questionNumberTextView = findViewById(R.id.questionNumberTextView)
-            hintTextView = findViewById(R.id.hintTextView)
-            hintButton = findViewById(R.id.hintButton)
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // Load the original layout
-            setContentView(R.layout.activity_juego)
-            // Update references to the views in the original layout
-            buttonContainer = findViewById(R.id.buttonContainer)
-            questionTextView = findViewById(R.id.questionTextView)
-            topicImageView = findViewById(R.id.topicImageView)
-            questionNumberTextView = findViewById(R.id.questionNumberTextView)
-            hintTextView = findViewById(R.id.hintTextView)
-            hintButton = findViewById(R.id.hintButton)
-        }
-    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
