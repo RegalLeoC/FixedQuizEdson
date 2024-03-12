@@ -312,6 +312,7 @@ class Juego : AppCompatActivity() {
             //Checa si esta contestado
             // Si contestaste bien pues se pone verde, pero si contestaste mal, se pinta el rojo y se pone el verde mostrandote cual era el correcto
             if (isAnswered) {
+                hintButton.isEnabled = false
                 button.isEnabled = false
                 val correctAnswer = questions[questionIndex].correctAnswer
                 if (option == correctAnswer) {
@@ -330,6 +331,7 @@ class Juego : AppCompatActivity() {
 
             //Permite usar hint y navegar
             if(!isAnswered){
+                hintButton.isEnabled = true
                 if(hintedButton){
                     button.setBackgroundColor(resources.getColor(android.R.color.holo_blue_light))
                     button.isEnabled = false
@@ -339,6 +341,8 @@ class Juego : AppCompatActivity() {
 
             // Navegacion si se contesto usando hints
             if(isAnsweredHint){
+                hintButton.isEnabled = false
+
                 button.isEnabled = false
                 val correctAnswer = questions[questionIndex].correctAnswer
 
@@ -359,6 +363,7 @@ class Juego : AppCompatActivity() {
 
             button.setOnClickListener {
                 if (!isAnswered) {
+                    hintButton.isEnabled = false
                     val correctAnswer = questions[questionIndex].correctAnswer
                     if (option == correctAnswer) {
                         button.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
@@ -465,6 +470,7 @@ class Juego : AppCompatActivity() {
                             answeredQuestionsHint[questionIndex] = true
                             child.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
                             //Igual deshabilita el hint button????
+                            hintButton.isEnabled = false
                             disableButtons()
 
                             //Checar si ya hay que terminar el juego

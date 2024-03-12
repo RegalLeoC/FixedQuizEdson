@@ -27,14 +27,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val intent = Intent(this, Juego::class.java)
             intent.putExtra("difficulty", difficulty[spinner.selectedItemPosition])
             startActivity(intent)
-            finish()
+
         }
 
         val opcionesbutton = findViewById<Button>(R.id.opcionesButton)
         opcionesbutton.setOnClickListener{
             val intent = Intent(this, OpcionesJuego::class.java)
             startActivity(intent)
-            finish()
         }
 
 

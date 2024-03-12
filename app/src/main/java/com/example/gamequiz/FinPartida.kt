@@ -25,10 +25,10 @@ class FinPartida : AppCompatActivity() {
         val finalResultTextView: TextView = findViewById(R.id.textViewResultFin)
         val difficultyMultiplierTextView: TextView = findViewById(R.id.textViewBonf)
 
-        deductionTextView.text = "Deduction: $deduction points"
-        totalScoreTextView.text = "Total Score: $totalScore points"
+        deductionTextView.text = "$deduction points"
+        totalScoreTextView.text = "$totalScore points"
         finalResultTextView.text = "$finalResult"
-        difficultyMultiplierTextView.text = "Difficulty Multiplier: $difficultyMultiplier"
+        difficultyMultiplierTextView.text = "$difficultyMultiplier"
 
         validationImgAndResult(finalResult)
 
@@ -36,7 +36,6 @@ class FinPartida : AppCompatActivity() {
 
         buttonVolver.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             finish()
 
         }
@@ -49,14 +48,14 @@ class FinPartida : AppCompatActivity() {
     private fun validationImgAndResult(result : Double) {
         val imageF: ImageView = findViewById(R.id.logoImageResult)
 
-        if (result in 100.0..200.0)
-            imageF.setImageResource(R.drawable.perritollorn)
-        if (result in 201.0..400.0)
-            imageF.setImageResource(R.drawable.knucles)
-        if (result in 401.0..700.0)
-            imageF.setImageResource(R.drawable.nah_id_win)
-        else
+        if (result in 0.0..200.0)
             imageF.setImageResource(R.drawable.mirada100)
+        if (result in 201.0..400.0)
+            imageF.setImageResource(R.drawable.perritollorn)
+        if (result in 401.0..700.0)
+            imageF.setImageResource(R.drawable.knucles)
+        if(result >= 701.0)
+            imageF.setImageResource(R.drawable.nah_id_win)
 
 
     }

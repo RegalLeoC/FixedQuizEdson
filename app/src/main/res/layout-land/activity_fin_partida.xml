@@ -59,12 +59,12 @@
 
             <TextView
                 android:id="@+id/textViewResultFin"
-                android:layout_width="40dp"
+                android:layout_width="87dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="#1D3557"
                 android:textSize="20sp"
-                tools:text="0"
-                android:textColor="#1D3557"/>
+                tools:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,12 +84,12 @@
 
             <TextView
                 android:id="@+id/textViewQuest"
-                android:layout_width="40dp"
+                android:layout_width="87dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="#457B9D"
                 android:textSize="18sp"
-                tools:text="0"
-                android:textColor="#457B9D"/>
+                tools:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,12 +109,12 @@
 
             <TextView
                 android:id="@+id/textViewHist"
-                android:layout_width="40dp"
+                android:layout_width="87dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="#457B9D"
                 android:textSize="18sp"
-                tools:text="0"
-                android:textColor="#457B9D"/>
+                tools:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -134,12 +134,12 @@
 
             <TextView
                 android:id="@+id/textViewBonf"
-                android:layout_width="40dp"
+                android:layout_width="89dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="#457B9D"
                 android:textSize="18sp"
-                tools:text="0"
-                android:textColor="#457B9D"/>
+                tools:text="0" />
         </LinearLayout>
 
         <Button
