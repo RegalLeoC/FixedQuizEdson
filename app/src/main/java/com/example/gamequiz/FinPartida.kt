@@ -1,7 +1,9 @@
 package com.example.gamequiz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -25,10 +27,21 @@ class FinPartida : AppCompatActivity() {
 
         deductionTextView.text = "Deduction: $deduction points"
         totalScoreTextView.text = "Total Score: $totalScore points"
-        finalResultTextView.text = "Final Result: $finalResult"
+        finalResultTextView.text = "$finalResult"
         difficultyMultiplierTextView.text = "Difficulty Multiplier: $difficultyMultiplier"
 
         validationImgAndResult(finalResult)
+
+        val buttonVolver: Button = findViewById(R.id.regresarInicioButton)
+
+        buttonVolver.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+
+
 
     }
 

@@ -541,6 +541,7 @@ class Juego : AppCompatActivity() {
         intent.putExtra("difficultyMultiplier", difficultyMultiplier)
 
         startActivity(intent)
+        finish()
 
     }
 
