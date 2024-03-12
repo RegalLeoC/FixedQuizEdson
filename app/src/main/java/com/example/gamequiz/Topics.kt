@@ -41,5 +41,15 @@ enum class Topics(val questions: List<Question>, val imageResourceId: Int) {
             Question("Which country does the Nile River exist in?", "Egypt", listOf("Sudan", "Ethiopia", "Uganda")),
             Question("Which state is the Popocatepetl in?", "Puebla", listOf("Mexico City", "Morelos", "Tlaxcala"))
         ), R.drawable.geography_image
-    )
+    ),
+    SPORTS(
+        listOf(
+
+            Question("¿Quién ganó la Copa Mundial de la FIFA 2018?", "Francia", listOf("Argentina", "Brasil", "España")),
+            Question("¿Cuál es el club más exitoso en la historia de la Liga de Campeones de la UEFA?", "Real Madrid", listOf("Manchester United", "Bayern Munich", "FC Barcelona")),
+            Question("¿Quién ha ganado el mayor número de Balones de Oro?", "Lionel Messi", listOf("Cristiona Ronaldo", "Neymar", "Zinedine Zidane")),
+            Question("¿Cuál es el torneo de tenis más prestigioso en el mundo?", "Wimbledon", listOf("Abierto Francia", "Abierto Australia", "Abierto USA")),
+            Question("¿Cuál es el deporte nacional de Canadá?", "Hockey", listOf("Beisbol", "Futbol", "Baloncesto"))
+        ), R.drawable.deporte
+    ),
 }
