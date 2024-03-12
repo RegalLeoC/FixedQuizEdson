@@ -13,6 +13,9 @@
         android:theme="@style/Theme.GameQuiz"
         tools:targetApi="31">
         <activity
+            android:name=".OpcionesJuego"
+            android:exported="false" />
+        <activity
             android:name=".FinPartida"
             android:exported="false" />
         <activity
